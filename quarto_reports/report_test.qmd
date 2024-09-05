@@ -1,5 +1,5 @@
 ---
-title: "Speed Missmatch"
+title: "test"
 format:
   html:
     page-layout: full
@@ -12,7 +12,7 @@ jupyter: python3
 #| echo: false
 
 video_path = "test_video.mp4"
-output_dir = None
+# output_dir = None
 ```
 
 ```{python}
@@ -32,7 +32,8 @@ TIME_SEGMENTS = [(1.0, 3.0), (5.0, 7.0)]
 #| label: video folder
 
 # video folder path
-video_folder = os.path.join(output_dir, "videos") if output_dir else "videos"
+# video_folder = os.path.join(output_dir, "videos") if output_dir else "videos"
+video_folder = "videos"
 
 # if folder already exists --> delete it
 if os.path.exists(video_folder):
