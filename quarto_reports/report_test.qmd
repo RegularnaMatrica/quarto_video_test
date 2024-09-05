@@ -1,0 +1,88 @@
+---
+title: "Speed Missmatch"
+format:
+  html:
+    page-layout: full
+    code-fold: true
+jupyter: python3
+---
+
+```{python}
+#| tags: [parameters]
+#| echo: false
+
+video_path = "test_video.mp4"
+output_dir = None
+```
+
+```{python}
+#| echo: false
+
+from moviepy.video.io.VideoFileClip import VideoFileClip
+import tempfile
+import os
+import shutil
+
+# this is calculated from data (its not deterministic)
+# thus videos clips are not available for adding to yaml
+TIME_SEGMENTS = [(1.0, 3.0), (5.0, 7.0)]
+```
+
+```{python}
+#| label: video folder
+
+# video folder path
+video_folder = os.path.join(output_dir, "videos") if output_dir else "videos"
+
+# if folder already exists --> delete it
+if os.path.exists(video_folder):
+    shutil.rmtree(video_folder)
+
+# create local folder for videos
+os.makedirs(video_folder)
+```
+
+```{python}
+#| output: asis
+#| echo: false
+
+# open video
+video = VideoFileClip(video_path).without_audio()
+
+print("\n\n::: {.panel-tabset .nav-pills}\n\n")
+
+for i, (t_start, t_end) in enumerate(TIME_SEGMENTS, start = 1):
+ 
+    # take video subclip
+    video_subclip = video.subclip(
+        t_start = max(0, t_start), 
+        t_end = min(t_end, video.duration)
+    )
+
+    # video save path
+    save_path = os.path.join(video_folder, f"video_{i}.mp4")
+
+    # save subclip
+    video_subclip.write_videofile(
+        filename = save_path,
+        codec = "libx264",
+        logger = None
+    )
+
+    # add tab
+    print(f"\n\n## Video: {i}\n\n")
+    # add video to the tab
+    print(f"\n\n{{{{< video {save_path} >}}}}\n\n")
+
+    # close subclip
+    video_subclip.reader.close()
+    if video_subclip.audio:
+        video_subclip.audio.reader.close_proc()
+
+print(":::")
+
+# close video
+video.reader.close()
+if video.audio:
+    video.audio.reader.close_proc()
+```
