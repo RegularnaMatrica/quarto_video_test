@@ -12,7 +12,7 @@ jupyter: python3
 #| echo: false
 
 video_path = "test_video.mp4"
-output_dir = None
+# output_dir = None
 ```
 
 ```{python}
