@@ -29,11 +29,11 @@ def render_quarto(
     # check if provided output file is html
     if output_dir:
         output_dir_basename = os.path.basename(output_dir)
-        # command += ["-P", f"output_dir:{output_dir_basename}"]
+        command += ["-P", f"output_dir:{output_dir_basename}"]
         command += ["--output-dir", output_dir_basename]
        
     # execute command
-    result = subprocess.run(command)#
+    result = subprocess.run(command)
 
     # check if command was executed successfully
     if result.returncode != 0:

@@ -12,7 +12,7 @@ jupyter: python3
 #| echo: false
 
 video_path = "test_video.mp4"
-# output_dir = None
+output_dir = None
 ```
 
 ```{python}
@@ -29,7 +29,6 @@ TIME_SEGMENTS = [(1.0, 3.0), (5.0, 7.0)]
 ```
 
 ```{python}
-#| label: video folder
 
 # video folder path
 # video_folder = os.path.join(output_dir, "videos") if output_dir else "videos"
@@ -52,7 +51,7 @@ video = VideoFileClip(video_path).without_audio()
 
 print("\n\n::: {.panel-tabset .nav-pills}\n\n")
 
-for i, (t_start, t_end) in enumerate(TIME_SEGMENTS, start = 1):
+for i, (t_start, t_end) in enumerate(TIME_SEGMENTS, start = 3):
  
     # take video subclip
     video_subclip = video.subclip(
@@ -61,7 +60,7 @@ for i, (t_start, t_end) in enumerate(TIME_SEGMENTS, start = 1):
     )
 
     # video save path
-    save_path = os.path.join(video_folder, f"video_{i}.mp4")
+    save_path = os.path.join(video_folder, f"abc_{i}.mp4")
 
     # save subclip
     video_subclip.write_videofile(

@@ -6,3 +6,6 @@ render_quarto(
     video_path = os.path.abspath("test_video.mp4"),
     output_dir = "report_folder"
 )
+
+
+
